@@ -1,0 +1,19 @@
+{
+  "name": "api-vendas",
+  "version": "1.0.0",
+  "description": "API REST de vendas, comissões, metas e performance (Node.js + Express + MySQL)",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "mysql2": "^3.11.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,504 @@
+{
+  "info": {
+    "name": "API Vendas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Vendedores",
+      "item": [
+        {
+          "name": "Cadastrar vendedor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Fábio Teixeira\",\n  \"meta_mensal\": 9000,\n  \"percentual_base\": 4.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cadastrar vendedor - dados inválidos (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"\",\n  \"meta_mensal\": -1,\n  \"percentual_base\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar vendedores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendedores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Consultar vendedor 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendedores/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Consultar vendedor inexistente (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendedores/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores",
+                "999"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar meta mensal",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta_mensal\": 12000\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedores/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar meta e percentual base",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta_mensal\": 8500,\n  \"percentual_base\": 4.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendedores/2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores",
+                "2"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Desativar vendedor 5",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendedores/5/desativar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores",
+                "5",
+                "desativar"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Vendas",
+      "item": [
+        {
+          "name": "Registrar venda (PJ, Norte, base 5% => R$ 180,00)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_vendedor\": 1,\n  \"id_regiao\": 1,\n  \"valor_venda\": 2000,\n  \"tipo_cliente\": \"PJ\",\n  \"data_venda\": \"2026-10-28 10:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Registrar venda com código próprio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_venda\": 100,\n  \"id_vendedor\": 3,\n  \"id_regiao\": 4,\n  \"valor_venda\": 1000,\n  \"tipo_cliente\": \"PF\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Venda com código duplicado (409)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_venda\": 100,\n  \"id_vendedor\": 3,\n  \"id_regiao\": 4,\n  \"valor_venda\": 1000,\n  \"tipo_cliente\": \"PF\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Venda para vendedor inexistente (404)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_vendedor\": 999,\n  \"id_regiao\": 1,\n  \"valor_venda\": 500,\n  \"tipo_cliente\": \"PF\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Venda para vendedor inativo (400) - rode após desativar o vendedor 5",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_vendedor\": 5,\n  \"id_regiao\": 1,\n  \"valor_venda\": 500,\n  \"tipo_cliente\": \"PF\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Venda com valor negativo (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_vendedor\": 1,\n  \"id_regiao\": 1,\n  \"valor_venda\": -50,\n  \"tipo_cliente\": \"PF\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Venda para região inexistente (404)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_vendedor\": 1,\n  \"id_regiao\": 99,\n  \"valor_venda\": 500,\n  \"tipo_cliente\": \"PF\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar vendas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Vendas do vendedor 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendas/vendedor/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas",
+                "vendedor",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Vendas da região 3 (Sudeste)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendas/regiao/3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas",
+                "regiao",
+                "3"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir venda 100",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendas/100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas",
+                "100"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir venda inexistente (404)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vendas/9999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas",
+                "9999"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Relatórios",
+      "item": [
+        {
+          "name": "Relatório de performance - outubro/2026",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/relatorios/performance?inicio=2026-10-01&fim=2026-10-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "relatorios",
+                "performance"
+              ],
+              "query": [
+                {
+                  "key": "inicio",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "fim",
+                  "value": "2026-10-31"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Relatório sem datas (400)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/relatorios/performance",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "relatorios",
+                "performance"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
